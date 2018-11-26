@@ -79,8 +79,8 @@
          </font>
       </Label>
       <Button fx:id="find" layoutX="972.0" layoutY="120.0" mnemonicParsing="false" onAction="#findBtn" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Find" textFill="WHITE" />
-      <Label fx:id="showDetails" layoutX="689.0" layoutY="202.0" prefHeight="131.0" prefWidth="373.0" />
-      <Label fx:id="showErrorDetails" layoutX="687.0" layoutY="352.0" prefHeight="131.0" prefWidth="373.0" />
+      <Label fx:id="showDetails" layoutX="736.0" layoutY="197.0" prefHeight="131.0" prefWidth="343.0" />
+      <Label fx:id="showErrorDetails" layoutX="736.0" layoutY="345.0" prefHeight="131.0" prefWidth="343.0" />
       <Button fx:id="pass" layoutX="940.0" layoutY="490.0" mnemonicParsing="false" onAction="#passBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Pass" textFill="WHITE" />
    </children>
 </Pane>

@@ -83,7 +83,6 @@ public class CreateSubjectController {
                     }
                 }
                 else{
-                    System.out.println("else");
                     if(preCourse1.getValue() == null){
                         preCourse = "-";
                     }

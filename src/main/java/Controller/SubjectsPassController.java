@@ -51,6 +51,7 @@ public class SubjectsPassController {
             showErrorDetails.setText("");
         }
         if(textFieldCourseID.getText() != null){
+            pass.setVisible(true);
             showErrorDetails.setText("");
             subject = subjectDB.getSubject(textFieldCourseID.getText());
             //System.out.println(subject.getCourseID());
@@ -67,15 +68,15 @@ public class SubjectsPassController {
                 }
             }
             else{
+                pass.setVisible(false);
                 showDetails.setText("Cannot Find Subject.");
             }
         }
         else{
+            pass.setVisible(false);
             showErrorDetails.setText("");
             showDetails.setText("Please fill in course id");
         }
-
-        pass.setVisible(true);
 
     }
     @FXML
@@ -128,7 +129,7 @@ public class SubjectsPassController {
                         showErrorDetails.setText("This subject need to study " + preCourse1 + " and " + preCourse2 + ".");
                     }
                     else if(countSubject == 3){
-                        showErrorDetails.setText("This subject need to study " + preCourse1 + ", " + preCourse2 + " and " + preCourse3 + ".");
+                        showErrorDetails.setText("This subject need to study " + preCourse1 + ", " + preCourse2 + "\nand " + preCourse3 + ".");
                     }
                 }
                 else {
