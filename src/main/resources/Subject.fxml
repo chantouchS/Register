@@ -59,15 +59,15 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="tableView" layoutX="150.0" layoutY="120.0" prefHeight="470.0" prefWidth="858.0" style="-fx-control-inner-background-alt: white;">
+      <TableView fx:id="tableView" layoutX="142.0" layoutY="120.0" prefHeight="470.0" prefWidth="920.0" style="-fx-control-inner-background-alt: white;">
         <columns>
             <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
             <TableColumn fx:id="courseTitle" prefWidth="320.0" text="Course Title" />
-            <TableColumn fx:id="preCourse" prefWidth="170.0" text="Pre Course" />
-          <TableColumn fx:id="year" prefWidth="54.4000244140625" text="Year" />
-          <TableColumn fx:id="semester" prefWidth="73.60003662109375" text="Semester" />
-            <TableColumn fx:id="credit" minWidth="0.0" prefWidth="50.39990234375" text="Credit" />
-            <TableColumn fx:id="difficult" prefWidth="97.5999755859375" text="Difficulty" />
+            <TableColumn fx:id="preCourse" prefWidth="219.199951171875" text="Pre Course" />
+          <TableColumn fx:id="year" minWidth="6.4000244140625" prefWidth="60.79998779296875" text="Year" />
+          <TableColumn fx:id="semester" prefWidth="72.00006103515625" text="Semester" />
+            <TableColumn fx:id="credit" minWidth="0.0" prefWidth="67.199951171875" text="Credit" />
+            <TableColumn fx:id="difficult" prefWidth="88.800048828125" text="Difficulty" />
         </columns>
       </TableView>
       <Button fx:id="createSubject" alignment="CENTER" layoutX="635.0" layoutY="620.0" mnemonicParsing="false" onAction="#create" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Create" textAlignment="CENTER" textFill="#cccbcb">

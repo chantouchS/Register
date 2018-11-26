@@ -59,28 +59,28 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="tableView" layoutX="150.0" layoutY="120.0" prefHeight="470.0" prefWidth="652.0" style="-fx-control-inner-background-alt: white;">
+      <TableView fx:id="tableView" layoutX="133.0" layoutY="120.0" prefHeight="470.0" prefWidth="714.0" style="-fx-control-inner-background-alt: white;">
         <columns>
             <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
-            <TableColumn fx:id="cTitle" prefWidth="229.0" text="Course Title" />
-            <TableColumn fx:id="preCourse" prefWidth="196.0" text="Pre Course" />
-            <TableColumn fx:id="credits" minWidth="0.0" prefWidth="60.0" text="Credit" />
-            <TableColumn fx:id="difficult" prefWidth="75.0" text="Difficulty" />
+            <TableColumn fx:id="cTitle" prefWidth="234.3999786376953" text="Course Title" />
+            <TableColumn fx:id="preCourse" prefWidth="243.199951171875" text="Pre Course" />
+            <TableColumn fx:id="credits" minWidth="0.0" prefWidth="63.20001220703125" text="Credit" />
+            <TableColumn fx:id="difficult" prefWidth="80.7999267578125" text="Difficulty" />
         </columns>
       </TableView>
-      <ChoiceBox fx:id="semester" layoutX="990.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
-      <ChoiceBox fx:id="year" layoutX="860.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="820.0" layoutY="120.0" text="Year" textFill="#070707">
+      <ChoiceBox fx:id="semester" layoutX="1025.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
+      <ChoiceBox fx:id="year" layoutX="895.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="855.0" layoutY="120.0" text="Year" textFill="#070707">
          <font>
             <Font name="Cordia New Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="920.0" layoutY="120.0" text="Semester" textFill="#070707">
+      <Label layoutX="955.0" layoutY="120.0" text="Semester" textFill="#070707">
          <font>
             <Font name="Cordia New Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="show" layoutX="890.0" layoutY="210.0" mnemonicParsing="false" onAction="#showSubjectBtn" prefHeight="50.0" prefWidth="109.0" style="-fx-background-color: #1a2224;" text="Show" textFill="#cccbcb">
+      <Button fx:id="show" layoutX="925.0" layoutY="210.0" mnemonicParsing="false" onAction="#showSubjectBtn" prefHeight="50.0" prefWidth="109.0" style="-fx-background-color: #1a2224;" text="Show" textFill="#cccbcb">
          <font>
             <Font name="Cordia New" size="22.0" />
          </font></Button>

@@ -21,10 +21,11 @@ import java.util.TreeSet;
 
 public class CreateSubjectController {
     private boolean checkAddMore = false;
+    private boolean checkAddMoreB3 = false;
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
-    @FXML protected ChoiceBox<String> year,semester,credit,preCourse1,preCourse2,difficult;
+    @FXML protected ChoiceBox<String> year,semester,credit,preCourse1,preCourse2,preCourse3,difficult;
     @FXML protected TextField courseId,courseTitle;
-    @FXML protected Button addMore,back,create,home,course,subjectB;
+    @FXML protected Button addMore,addMoreB3,back,create,home,course,subjectB;
     @FXML protected Label showCourseID,showCourseTitle,showError;
     private SubjectDB subjectDB;
     private ArrayList<String> courseArrayList = subjectDB.getCourseID();
@@ -43,6 +44,7 @@ public class CreateSubjectController {
         credit.getItems().addAll(yearList);
         preCourse1.getItems().addAll(courseObserve);
         preCourse2.getItems().addAll(courseObserve);
+        preCourse3.getItems().addAll(courseObserve);
         difficult.getItems().addAll(difficultList);
 
     }
@@ -58,7 +60,7 @@ public class CreateSubjectController {
                 String courseID = courseId.getText();
                 String courseT = courseTitle.getText();
                 int creditNochoice = Integer.parseInt(credit.getValue());
-                if(checkAddMore){
+                if(checkAddMore && !checkAddMoreB3){
                     if(preCourse1.getValue() == null || preCourse2.getValue() == null){
                         preCourse = "-";
                     }
@@ -66,7 +68,22 @@ public class CreateSubjectController {
                         preCourse = preCourse1.getValue() + "," +  preCourse2.getValue();
                     }
                 }
+                else if(checkAddMore && checkAddMoreB3){
+                    if(preCourse1.getValue() == null){
+                        preCourse = "-";
+                    }
+                    else if(preCourse2.getValue() == null){
+                        preCourse = "-";
+                    }
+                    else if(preCourse3.getValue() == null){
+                        preCourse = "-";
+                    }
+                    else if(preCourse1 != null && preCourse2 != null && preCourse3 != null){
+                        preCourse = preCourse1.getValue() + "," +  preCourse2.getValue() + "," + preCourse3.getValue();
+                    }
+                }
                 else{
+                    System.out.println("else");
                     if(preCourse1.getValue() == null){
                         preCourse = "-";
                     }
@@ -118,6 +135,11 @@ public class CreateSubjectController {
     public void addMoreM(){
         checkAddMore = true;
         preCourse2.setDisable(false);
+    }
+    @FXML
+    public void  addMoreB3(){
+        checkAddMoreB3 = true;
+        preCourse3.setDisable(false);
     }
     @FXML
     public void backBtn(ActionEvent event) throws IOException {

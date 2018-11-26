@@ -47,7 +47,11 @@ public class SubjectsPassController {
     }
     @FXML
     public void findBtn(){
+        if(showErrorDetails.getText().equals("Please click find button.")){
+            showErrorDetails.setText("");
+        }
         if(textFieldCourseID.getText() != null){
+            showErrorDetails.setText("");
             subject = subjectDB.getSubject(textFieldCourseID.getText());
             //System.out.println(subject.getCourseID());
             if(subject != null){
@@ -67,6 +71,7 @@ public class SubjectsPassController {
             }
         }
         else{
+            showErrorDetails.setText("");
             showDetails.setText("Please fill in course id");
         }
 
@@ -75,9 +80,8 @@ public class SubjectsPassController {
     }
     @FXML
     public void passBtn(){
-        if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
-            System.out.println("1111");
-            System.out.println(subject.getPreCourse());
+        if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
+            showDetails.setText("");
             SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit());
 //            courseID.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseID"));
 //            courseTitle.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseTitle"));
@@ -87,45 +91,56 @@ public class SubjectsPassController {
             passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
         }
         else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
+            System.out.println("else if");
             System.out.println("12123");
             showDetails.setText("You pass this subject.");
             textFieldCourseID.setText("");
         }
         else{
-            System.out.println("Controller");
-            int countSubject = 0;
-            String preCourse1 = "";
-            String preCourse2 = "";
-            boolean check = false;
-            ArrayList<String> pCourseFromDB = SubjectPassDB.getSubjectNeedToStudy();
-            System.out.println("Controller: " + subject.getPreCourse());
-//            for(String c:pCourseFromDB){
-//                System.out.println(c);
-//            }
-            if(subject.getPreCourse().contains(",")){
-                String[] pCourseSplit = subject.getPreCourse().split(",");
-                for(String pCourse:pCourseSplit){
-                    countSubject+=1;
-                    for (String pCourseDB:pCourseFromDB){
-                        if(pCourseDB.equals(pCourse)){
-                            check = true;
+            if(textFieldCourseID.getText().equals(subject.getCourseID())){
+                int countSubject = 0;
+                String preCourse1 = "";
+                String preCourse2 = "";
+                String preCourse3 = "";
+                boolean check = false;
+                ArrayList<String> pCourseFromDB = SubjectPassDB.getSubjectNeedToStudy();
+                if(subject.getPreCourse().contains(",")){
+                    String[] pCourseSplit = subject.getPreCourse().split(",");
+                    for(String pCourse:pCourseSplit){
+                        countSubject+=1;
+                        for (String pCourseDB:pCourseFromDB){
+                            if(pCourseDB.equals(pCourse)){
+                                check = true;
+                            }
                         }
+                        if(!check && countSubject == 1){
+                            preCourse1 = pCourse;
+                        }
+                        else if(!check && countSubject == 2){
+                            preCourse2 = pCourse;
+                        }
+                        else if(!check && countSubject == 3){
+                            preCourse3 = pCourse;
+                        }
+                        check = false;
                     }
-                    if(!check && countSubject == 1){
-                        preCourse1 = pCourse;
+                    if(countSubject == 2){
+                        showErrorDetails.setText("This subject need to study " + preCourse1 + " and " + preCourse2 + ".");
                     }
-                    else if(!check && countSubject == 2){
-                        preCourse2 = pCourse;
+                    else if(countSubject == 3){
+                        showErrorDetails.setText("This subject need to study " + preCourse1 + ", " + preCourse2 + " and " + preCourse3 + ".");
                     }
-                    check = false;
                 }
-                showErrorDetails.setText("This subject need to study " + preCourse1 + " and " + preCourse2 + ".");
-            }
-            else {
-                if(!pCourseFromDB.contains(subject.getPreCourse())){
-                    showErrorDetails.setText("This subject need to study " + subject.getPreCourse() + ".");
+                else {
+                    if(!pCourseFromDB.contains(subject.getPreCourse())){
+                        showErrorDetails.setText("This subject need to study " + subject.getPreCourse() + ".");
+                    }
                 }
             }
+            else{
+                showErrorDetails.setText("Please click find button.");
+            }
+
         }
         setVisiblePassBtn();
 

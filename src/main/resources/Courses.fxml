@@ -60,11 +60,11 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="passTableView" layoutX="150.0" layoutY="120.0" prefHeight="470.0" prefWidth="500.0" style="-fx-control-inner-background-alt: white;">
+      <TableView fx:id="passTableView" layoutX="150.0" layoutY="120.0" prefHeight="470.0" prefWidth="567.0" style="-fx-control-inner-background-alt: white;">
         <columns>
             <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
-            <TableColumn fx:id="courseTitle" prefWidth="350.0" text="Course Title" />
-            <TableColumn fx:id="credit" minWidth="0.0" prefWidth="60.0" text="Credit" />
+            <TableColumn fx:id="courseTitle" prefWidth="421.6000061035156" text="Course Title" />
+            <TableColumn fx:id="credit" minWidth="0.0" prefWidth="51.20001220703125" text="Credit" />
         </columns>
       </TableView>
       <Label layoutX="370.0" layoutY="75.0" text="Pass Course" textFill="#070707">
@@ -79,8 +79,8 @@
          </font>
       </Label>
       <Button fx:id="find" layoutX="972.0" layoutY="120.0" mnemonicParsing="false" onAction="#findBtn" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Find" textFill="WHITE" />
-      <Label fx:id="showDetails" layoutX="736.0" layoutY="202.0" prefHeight="131.0" prefWidth="274.0" />
-      <Label fx:id="showErrorDetails" layoutX="736.0" layoutY="352.0" prefHeight="131.0" prefWidth="274.0" />
+      <Label fx:id="showDetails" layoutX="689.0" layoutY="202.0" prefHeight="131.0" prefWidth="373.0" />
+      <Label fx:id="showErrorDetails" layoutX="687.0" layoutY="352.0" prefHeight="131.0" prefWidth="373.0" />
       <Button fx:id="pass" layoutX="940.0" layoutY="490.0" mnemonicParsing="false" onAction="#passBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Pass" textFill="WHITE" />
    </children>
 </Pane>

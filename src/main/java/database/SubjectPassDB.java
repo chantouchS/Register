@@ -37,6 +37,7 @@ public class SubjectPassDB {
         return check;
     }
     public static boolean getCheck(String preCourse){
+        String[] pCourseSplit = preCourse.split(",");
         //System.out.println(preCourse);
         boolean checkStudy = false;
         int numOfPcourse = 0;
@@ -65,8 +66,15 @@ public class SubjectPassDB {
                                     numOfPcourse += 1;
                                 }
                             }
-                            if(numOfPcourse == 2){
-                                checkStudy = true;
+                            if(pCourseSplit.length == 2){
+                                if(numOfPcourse == 2){
+                                    checkStudy = true;
+                                }
+                            }
+                            else if(pCourseSplit.length == 3){
+                                if(numOfPcourse == 3){
+                                    checkStudy = true;
+                                }
                             }
                         }
                         else{
@@ -85,7 +93,6 @@ public class SubjectPassDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(checkStudy);
         return checkStudy;
     }
     public static void saveSubjectPass(String courseID, String courseTitle, int credit){

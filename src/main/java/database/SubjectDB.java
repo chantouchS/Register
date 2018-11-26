@@ -36,6 +36,7 @@ public class SubjectDB {
         return courseSet;
     }
     public static void saveSubjects(int semester,int year,String courseID,String courseTitle,int credit,String preCourse,String colorDifficult){
+        System.out.println(preCourse);
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);

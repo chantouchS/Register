@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Subject;
 import model.SubjectPass;
@@ -59,7 +60,7 @@ public class HomeController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-        stage.setScene(new Scene(loader.load()));
+        stage.setScene(new Scene(loader.load(),1080,720));
         stage.show();
     }
     @FXML
@@ -70,6 +71,10 @@ public class HomeController {
             preCourse.setCellValueFactory(new PropertyValueFactory<Subject,String>("preCourse"));
             credits.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("credit"));
             difficult.setCellValueFactory(new PropertyValueFactory<Subject,String>("difficult"));
+//            ObservableList ob = FXCollections.observableArrayList(SubjectDB.getAllSubjects(year.getValue(),semester.getValue()));
+//            for(Subject s:ob)
+//            for(Object object: tableView.getItems().stream().forEach(o);)
+//            difficult.setStyle("-fx-text-fill: red");
             tableView.setItems(SubjectDB.getAllSubjects(year.getValue(),semester.getValue()));
         }
     }
