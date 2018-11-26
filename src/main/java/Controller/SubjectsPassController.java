@@ -83,6 +83,7 @@ public class SubjectsPassController {
 //            courseTitle.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseTitle"));
 //            credit.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("credit"));
             //System.out.println("111");
+            showErrorDetails.setText("");
             passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
         }
         else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){

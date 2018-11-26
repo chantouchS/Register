@@ -14,32 +14,32 @@
    <children>
       <Pane prefHeight="739.0" prefWidth="120.0" style="-fx-background-color: #1a2224;">
          <children>
-            <Button fx:id="home" alignment="CENTER" layoutY="107.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Home" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="home" alignment="CENTER" layoutY="130.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Home" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
             </Button>
-            <ImageView fx:id="homeIcon" fitHeight="19.0" fitWidth="19.0" layoutX="14.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeIcon" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/Home.png" />
                </image>
             </ImageView>
-            <Button fx:id="yourCourse" alignment="CENTER" layoutY="157.0" mnemonicParsing="false" onAction="#yourCourseBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Course" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="yourCourse" alignment="CENTER" layoutY="180.0" mnemonicParsing="false" onAction="#yourCourseBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Course" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="subjects" alignment="CENTER" layoutY="207.0" mnemonicParsing="false" onAction="#subjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="    Subjects" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="subjects" alignment="CENTER" layoutY="230.0" mnemonicParsing="false" onAction="#subjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="    Subjects" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
             </Button>
-            <ImageView fx:id="subject" fitHeight="19.0" fitWidth="19.0" layoutX="14.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="subject" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/Subject.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="course" fitHeight="19.0" fitWidth="19.0" layoutX="14.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="course" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/course.png" />
                </image>
@@ -59,7 +59,7 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="tableView" layoutX="151.0" layoutY="118.0" prefHeight="470.0" prefWidth="652.0" style="-fx-control-inner-background-alt: white;">
+      <TableView fx:id="tableView" layoutX="150.0" layoutY="120.0" prefHeight="470.0" prefWidth="652.0" style="-fx-control-inner-background-alt: white;">
         <columns>
             <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
             <TableColumn fx:id="cTitle" prefWidth="229.0" text="Course Title" />
@@ -68,19 +68,19 @@
             <TableColumn fx:id="difficult" prefWidth="75.0" text="Difficulty" />
         </columns>
       </TableView>
-      <ChoiceBox fx:id="semester" layoutX="991.0" layoutY="118.0" prefHeight="25.0" prefWidth="50.0" />
-      <ChoiceBox fx:id="year" layoutX="859.0" layoutY="118.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="818.0" layoutY="115.0" text="Year" textFill="#070707">
+      <ChoiceBox fx:id="semester" layoutX="990.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
+      <ChoiceBox fx:id="year" layoutX="860.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="820.0" layoutY="120.0" text="Year" textFill="#070707">
          <font>
             <Font name="Cordia New Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="921.0" layoutY="115.0" text="Semester" textFill="#070707">
+      <Label layoutX="920.0" layoutY="120.0" text="Semester" textFill="#070707">
          <font>
             <Font name="Cordia New Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="show" layoutX="891.0" layoutY="214.0" mnemonicParsing="false" onAction="#showSubjectBtn" prefHeight="50.0" prefWidth="109.0" style="-fx-background-color: #1a2224;" text="show" textFill="#cccbcb">
+      <Button fx:id="show" layoutX="890.0" layoutY="210.0" mnemonicParsing="false" onAction="#showSubjectBtn" prefHeight="50.0" prefWidth="109.0" style="-fx-background-color: #1a2224;" text="Show" textFill="#cccbcb">
          <font>
             <Font name="Cordia New" size="22.0" />
          </font></Button>

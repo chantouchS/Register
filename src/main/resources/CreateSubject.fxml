@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateSubjectController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CreateSubjectController">
    <children>
       <Pane prefHeight="720.0" prefWidth="120.0" style="-fx-background-color: #1a2224;">
          <children>
-            <Button alignment="CENTER" layoutY="130.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Home" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="home" alignment="CENTER" layoutY="130.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Home" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
@@ -23,12 +23,12 @@
                   <Image url="@image/Home.png" />
                </image>
             </ImageView>
-            <Button alignment="CENTER" layoutY="180.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Course" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="course" alignment="CENTER" layoutY="180.0" mnemonicParsing="false" onAction="#yourCourseBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Course" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="    Subjects" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="subjectB" alignment="CENTER" layoutY="230.0" mnemonicParsing="false" onAction="#subjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="    Subjects" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>

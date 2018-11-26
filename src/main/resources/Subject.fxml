@@ -59,7 +59,7 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="tableView" layoutX="161.0" layoutY="115.0" prefHeight="470.0" prefWidth="858.0" style="-fx-control-inner-background-alt: white;">
+      <TableView fx:id="tableView" layoutX="150.0" layoutY="120.0" prefHeight="470.0" prefWidth="858.0" style="-fx-control-inner-background-alt: white;">
         <columns>
             <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
             <TableColumn fx:id="courseTitle" prefWidth="320.0" text="Course Title" />

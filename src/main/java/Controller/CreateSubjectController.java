@@ -24,7 +24,7 @@ public class CreateSubjectController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     @FXML protected ChoiceBox<String> year,semester,credit,preCourse1,preCourse2,difficult;
     @FXML protected TextField courseId,courseTitle;
-    @FXML protected Button addMore,back,create;
+    @FXML protected Button addMore,back,create,home,course,subjectB;
     @FXML protected Label showCourseID,showCourseTitle,showError;
     private SubjectDB subjectDB;
     private ArrayList<String> courseArrayList = subjectDB.getCourseID();
@@ -124,6 +124,32 @@ public class CreateSubjectController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Subject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+
+    @FXML
+    public void yourCourseBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Courses.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+
+    @FXML
+    public void subjectsBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Subject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+    @FXML
+    public void homeBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }
