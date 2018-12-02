@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="502.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SaveSubjectController">
+   <children>
+      <TableView fx:id="tableView" layoutX="12.0" layoutY="32.0" prefHeight="470.0" prefWidth="1034.0" style="-fx-control-inner-background-alt: white;">
+         <columns>
+            <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
+            <TableColumn fx:id="courseTitle" prefWidth="320.0" text="Course Title" />
+            <TableColumn fx:id="preCourse" prefWidth="219.199951171875" text="Pre Course" />
+            <TableColumn fx:id="year" minWidth="6.4000244140625" prefWidth="60.79998779296875" text="Year" />
+            <TableColumn fx:id="semester" prefWidth="72.00006103515625" text="Semester" />
+            <TableColumn fx:id="credit" minWidth="0.0" prefWidth="67.199951171875" text="Credit" />
+            <TableColumn fx:id="difficult" prefWidth="88.800048828125" text="Difficulty" />
+            <TableColumn fx:id="withCourseID" prefWidth="113.60001220703134" text="With Course ID" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
