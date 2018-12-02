@@ -59,12 +59,13 @@ public class SubjectsPassController {
                 if(textFieldCourseID.getText().equals(subject.getCourseID())){
                     //System.out.println(subject.getCourseID());
                     showDetails.setText("Name: " + subject.getCourseTitle() + "\n"
-                            + "ID :" + subject.getCourseID() + "\n"
+                            + "ID: " + subject.getCourseID() + "\n"
                             + "Credit: " + subject.getCredit() + "\n"
                             + "Year: " + subject.getYear() + "\n"
                             + "Semester: " + subject.getSemester() + "\n"
                             + "Pre-Course: " + subject.getPreCourse() + "\n"
-                            + "Difficult: " + subject.getDifficult());
+                            + "Difficult: " + subject.getDifficult() + "\n"
+                            + "Duo Course ID: " + subject.getDuoCourseID());
                 }
             }
             else{

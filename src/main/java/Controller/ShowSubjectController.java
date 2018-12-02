@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Subject;
 
@@ -20,7 +21,7 @@ public class ShowSubjectController {
     private SubjectDB subjectDB;
     @FXML protected Button home,createSubject,delete,course,subject;
     @FXML private TableView<Subject> tableView;
-    @FXML protected TableColumn semester,year,courseID,courseTitle,credit,preCourse,difficult;
+    @FXML protected TableColumn semester,year,courseID,courseTitle,credit,preCourse,difficult,withCourseID;
 
     @FXML
     public void initialize(){
@@ -31,7 +32,8 @@ public class ShowSubjectController {
         courseTitle.setCellValueFactory(new PropertyValueFactory<Subject,String>("courseTitle"));
         credit.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("credit"));
         preCourse.setCellValueFactory(new PropertyValueFactory<Subject,String>("preCourse"));
-        difficult.setCellValueFactory(new PropertyValueFactory<Subject,String>("difficult"));
+        difficult.setCellValueFactory(new PropertyValueFactory<Subject,Pane>("difficult"));
+        withCourseID.setCellValueFactory(new PropertyValueFactory<Subject,String>("duoCourseID"));
         tableView.setItems(subjectDB.getAllSubjects());
     }
     @FXML

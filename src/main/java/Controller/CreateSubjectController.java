@@ -24,7 +24,7 @@ public class CreateSubjectController {
     private boolean checkAddMoreB3 = false;
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     @FXML protected ChoiceBox<String> year,semester,credit,preCourse1,preCourse2,preCourse3,difficult;
-    @FXML protected TextField courseId,courseTitle;
+    @FXML protected TextField courseId,courseTitle,duoCourse;
     @FXML protected Button addMore,addMoreB3,back,create,home,course,subjectB;
     @FXML protected Label showCourseID,showCourseTitle,showError;
     private SubjectDB subjectDB;
@@ -59,7 +59,14 @@ public class CreateSubjectController {
                 int yearValue = Integer.parseInt(year.getValue());
                 String courseID = courseId.getText();
                 String courseT = courseTitle.getText();
+                String dc = duoCourse.getText();
+                System.out.println("dc: " + dc);
+
                 int creditNochoice = Integer.parseInt(credit.getValue());
+                if(dc.equals("")){
+                    System.out.println("if dc");
+                    dc = "-";
+                }
                 if(checkAddMore && !checkAddMoreB3){
                     if(preCourse1.getValue() == null || preCourse2.getValue() == null){
                         preCourse = "-";
@@ -93,7 +100,7 @@ public class CreateSubjectController {
 
                 String colorDifficult = difficult.getValue();
 
-                subjectDB.saveSubjects(semesterValue,yearValue,courseID,courseT,creditNochoice,preCourse,colorDifficult);
+                subjectDB.saveSubjects(semesterValue,yearValue,courseID,courseT,creditNochoice,preCourse,colorDifficult,dc);
                 goToShowSubjectAfterCreateSubject(event);
             }
             else if(!SubjectDB.checkSameCourseID(courseId.getText()) && SubjectDB.checkSameCourseTitle(courseTitle.getText())){

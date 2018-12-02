@@ -3,11 +3,10 @@ package database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Subject;
+import model.SubjectPlan;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class SubjectDB {
     private static String dbURL = "jdbc:sqlite:Database.db";
@@ -35,14 +34,14 @@ public class SubjectDB {
         }
         return courseSet;
     }
-    public static void saveSubjects(int semester,int year,String courseID,String courseTitle,int credit,String preCourse,String colorDifficult){
+    public static void saveSubjects(int semester,int year,String courseID,String courseTitle,int credit,String preCourse,String colorDifficult,String dc){
         System.out.println(preCourse);
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if(connection != null){
-                String query = "insert into Subjects (Semester,Year,CourseID,CourseTitle,Credit,PreCourse,Difficult) values " +
-                        "('" + semester + "' , '" + year + "' , '" + courseID + "' , '" + courseTitle + "' , '" + credit + "' , '" + preCourse + "' , '" + colorDifficult + "')";
+                String query = "insert into Subjects (Semester,Year,CourseID,CourseTitle,Credit,PreCourse,Difficult,WithCourseID) values " +
+                        "('" + semester + "' , '" + year + "' , '" + courseID + "' , '" + courseTitle + "' , '" + credit + "' , '" + preCourse + "' , '" + colorDifficult + "' , '" + dc + "')";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 connection.close();
@@ -70,11 +69,12 @@ public class SubjectDB {
                     int credit = resultSet.getInt("Credit");
                     String preCourse = resultSet.getString("PreCourse");
                     String difficult = resultSet.getString("Difficult");
+                    String dc = resultSet.getString("WithCourseID");
                     if(preCourse == null){
                         preCourse = "-";
                         //System.out.println(preCourse);
                     }
-                    subjectObservableList.add(new Subject(semester,year,courseID,courseTitle,credit,preCourse,difficult));
+                    subjectObservableList.add(new Subject(semester,year,courseID,courseTitle,credit,preCourse,difficult,dc));
                 }
                 connection.close();
             }
@@ -118,14 +118,15 @@ public class SubjectDB {
                     int credit = resultSet.getInt("Credit");
                     String preCourse = resultSet.getString("PreCourse");
                     String difficult = resultSet.getString("Difficult");
+                    String dc = resultSet.getString("WithCourseID");
                     if(courseID.equals(courseIDP)){
                         if(preCourse == null){
                             preCourse = "-";
                         }
-                        subject = new Subject(semester,year,courseID,courseTitle,credit,preCourse,difficult);
+                        subject = new Subject(semester,year,courseID,courseTitle,credit,preCourse,difficult,dc);
                     }
                     else {
-                        subject = new Subject(semester,year,courseID,courseTitle,credit,preCourse,difficult);
+                        subject = new Subject(semester,year,courseID,courseTitle,credit,preCourse,difficult,dc);
                     }
                 }
                 connection.close();
@@ -204,8 +205,9 @@ public class SubjectDB {
                     int credit = resultSet.getInt("Credit");
                     String preCourse = resultSet.getString("PreCourse");
                     String difficult = resultSet.getString("Difficult");
+                    String dc = resultSet.getString("WithCourseID");
                     if (yearDB == year && semesterDB == semester) {
-                        subjectObservableList.add(new Subject(semesterDB, yearDB, courseID, courseTitle, credit, preCourse, difficult));
+                        subjectObservableList.add(new Subject(semesterDB, yearDB, courseID, courseTitle, credit, preCourse, difficult,dc));
                     }
                 }
                 connection.close();
@@ -216,5 +218,40 @@ public class SubjectDB {
             e.printStackTrace();
         }
         return subjectObservableList;
+    }
+    public static Subject getDuoCourseID(String duoCourseID){
+        //System.out.println(duoCourseID);
+        Subject subject = null;
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "select * from Subjects";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    int semesterDB = resultSet.getInt("Semester");
+                    int yearDB = resultSet.getInt("Year");
+                    String courseID = resultSet.getString("CourseID");
+                    String courseTitle = resultSet.getString("CourseTitle");
+                    int credit = resultSet.getInt("Credit");
+                    String preCourseDB = resultSet.getString("PreCourse");
+                    String difficult = resultSet.getString("Difficult");
+                    String dc = resultSet.getString("WithCourseID");
+                    System.out.println("duoCourseID = " + duoCourseID);
+                    System.out.println("courseTitle = " + courseTitle);
+                    if(duoCourseID.equals(courseTitle)){
+                        System.out.println(courseTitle);
+                        subject = new Subject(semesterDB,yearDB,courseID,courseTitle,credit,preCourseDB,difficult,dc);
+                    }
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //System.out.println(subject.toString());
+        return subject;
     }
 }

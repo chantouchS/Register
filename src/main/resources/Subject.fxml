@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShowSubjectController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1227.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ShowSubjectController">
    <children>
       <Pane prefHeight="720.0" prefWidth="120.0" style="-fx-background-color: #1a2224;">
          <children>
@@ -45,7 +45,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane prefHeight="60.0" prefWidth="1080.0" style="-fx-background-color: #1a2224;">
+      <Pane prefHeight="60.0" prefWidth="1247.0" style="-fx-background-color: #1a2224;">
          <children>
             <ImageView fx:id="kuSign" fitHeight="50.0" fitWidth="50.0" layoutX="30.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -59,7 +59,7 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="tableView" layoutX="142.0" layoutY="120.0" prefHeight="470.0" prefWidth="920.0" style="-fx-control-inner-background-alt: white;">
+      <TableView fx:id="tableView" layoutX="142.0" layoutY="120.0" prefHeight="470.0" prefWidth="1015.0" style="-fx-control-inner-background-alt: white;">
         <columns>
             <TableColumn fx:id="courseID" prefWidth="90.0" text="Course ID" />
             <TableColumn fx:id="courseTitle" prefWidth="320.0" text="Course Title" />
@@ -68,6 +68,7 @@
           <TableColumn fx:id="semester" prefWidth="72.00006103515625" text="Semester" />
             <TableColumn fx:id="credit" minWidth="0.0" prefWidth="67.199951171875" text="Credit" />
             <TableColumn fx:id="difficult" prefWidth="88.800048828125" text="Difficulty" />
+            <TableColumn fx:id="withCourseID" prefWidth="94.199951171875" text="WithCourseID" />
         </columns>
       </TableView>
       <Button fx:id="createSubject" alignment="CENTER" layoutX="635.0" layoutY="620.0" mnemonicParsing="false" onAction="#create" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Create" textAlignment="CENTER" textFill="#cccbcb">

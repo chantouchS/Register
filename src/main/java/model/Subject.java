@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.layout.Pane;
+
 public class Subject {
     private int semester;
     private int year;
@@ -8,8 +10,10 @@ public class Subject {
     private int credit;
     private String preCourse;
     private String difficult;
+    private String duoCourseID;
+    private Pane difficultPane;
 
-    public Subject(int semester, int year, String courseID, String courseTitle, int credit, String preCourse, String difficult) {
+    public Subject(int semester, int year, String courseID, String courseTitle, int credit, String preCourse, String difficult,String duoCourseID) {
         this.semester = semester;
         this.year = year;
         this.courseID = courseID;
@@ -17,6 +21,18 @@ public class Subject {
         this.credit = credit;
         this.preCourse = preCourse;
         this.difficult = difficult;
+        this.difficultPane = new Pane();
+        if(difficult.equals("Red")){
+            this.difficultPane.setStyle("-fx-background-color: red;");
+        }
+        else if (difficult.equals("Blue")){
+            this.difficultPane.setStyle("-fx-background-color: blue;");
+        }
+        else{
+            this.difficultPane.setStyle("-fx-background-color: green;");
+        }
+
+        this.duoCourseID = duoCourseID;
     }
 
     public int getSemester() {
@@ -47,6 +63,14 @@ public class Subject {
         return difficult;
     }
 
+    public Pane getDifficultPane() {
+        return difficultPane;
+    }
+
+    public String getDuoCourseID() {
+        return duoCourseID;
+    }
+
     @Override
     public String toString() {
         return "Subject{" +
@@ -57,6 +81,7 @@ public class Subject {
                 ", credit=" + credit +
                 ", preCourse='" + preCourse + '\'' +
                 ", difficult='" + difficult + '\'' +
+                ", duoCourseID='" + duoCourseID + '\'' +
                 '}';
     }
 }

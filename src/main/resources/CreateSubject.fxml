@@ -113,7 +113,13 @@
       <Label fx:id="showCourseID" layoutX="450.0" layoutY="282.0" prefHeight="17.0" prefWidth="191.0" />
       <Label fx:id="showCourseTitle" layoutX="745.0" layoutY="282.0" prefHeight="17.0" prefWidth="191.0" />
       <Label fx:id="showError" layoutX="538.0" layoutY="508.0" prefHeight="17.0" prefWidth="180.0" />
-      <Button fx:id="addMoreB3" layoutX="646.0" layoutY="403.0" mnemonicParsing="false" onAction="#addMoreB3" prefHeight="25.0" prefWidth="93.0" style="-fx-background-color: #1a2224;" text="Add more2" textFill="#f0f0f0" />
+      <Button fx:id="addMoreB3" layoutX="646.0" layoutY="403.0" mnemonicParsing="false" onAction="#addMoreB3" prefHeight="25.0" prefWidth="93.0" style="-fx-background-color: #1a2224;" text="Add more" textFill="#f0f0f0" />
       <ChoiceBox fx:id="preCourse3" disable="true" layoutX="748.0" layoutY="403.0" prefHeight="25.0" prefWidth="138.0" />
+      <Label layoutX="325.0" layoutY="359.0" text="With Course ID :" textFill="#070707">
+         <font>
+            <Font name="Cordia New Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="duoCourse" layoutX="452.0" layoutY="362.0" />
    </children>
 </Pane>
