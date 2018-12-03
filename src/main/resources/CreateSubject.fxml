@@ -13,22 +13,22 @@
    <children>
       <Pane prefHeight="720.0" prefWidth="120.0" style="-fx-background-color: #1a2224;">
          <children>
-            <Button fx:id="home" alignment="CENTER" layoutY="130.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Home" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="home" alignment="CENTER" layoutY="130.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Home" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
             </Button>
-            <ImageView fx:id="homeIcon" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeIcon" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/Home.png" />
                </image>
             </ImageView>
-            <Button fx:id="course" alignment="CENTER" layoutY="180.0" mnemonicParsing="false" onAction="#yourCourseBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Course" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="course" alignment="CENTER" layoutY="180.0" mnemonicParsing="false" onAction="#yourCourseBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="    Course" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="subjectB" alignment="CENTER" layoutY="230.0" mnemonicParsing="false" onAction="#subjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="    Subjects" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="subjectB" alignment="CENTER" layoutY="230.0" mnemonicParsing="false" onAction="#subjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="      Subjects" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New Bold" size="22.0" />
                </font>
@@ -41,6 +41,16 @@
             <ImageView fx:id="courseI" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@image/course.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="saveSubject" alignment="CENTER" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Save" textAlignment="CENTER" textFill="#cccbcb">
+               <font>
+                  <Font name="Cordia New" size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="subjectI1" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/icons8-save-as-64.png" />
                </image>
             </ImageView>
          </children>

@@ -35,6 +35,18 @@ public class SaveSubjectController {
         withCourseID.setCellValueFactory(new PropertyValueFactory<SubjectPlan,String>("withCourseID"));
 
         tableView.setItems(SubjectPlanDB.getAllSubject());
+        setResizeable();
+    }
+    public void setResizeable()
+    {
+        semester.setResizable(false);
+        year.setResizable(false);
+        courseID.setResizable(false);
+        courseTitle.setResizable(false);
+        credit.setResizable(false);
+        preCourse.setResizable(false);
+        withCourseID.setResizable(false);
+        difficult.setResizable(false);
     }
     @FXML
     public void yourCourseBtn(ActionEvent event) throws IOException {

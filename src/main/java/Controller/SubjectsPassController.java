@@ -47,6 +47,15 @@ public class SubjectsPassController {
         passTableView.setItems(addToTable);
         setVisibleFBtn();
         setVisiblePassBtn();
+        setResizeable();
+    }
+
+    public void setResizeable()
+    {
+        courseID.setResizable(false);
+        courseTitle.setResizable(false);
+        credit.setResizable(false);
+        status.setResizable(false);
     }
     @FXML
     public void findBtn(){
@@ -90,7 +99,11 @@ public class SubjectsPassController {
     public void passBtn(){
         int arrayAccount[] = AccountDB.checkYAS();
         int arraySubject[] = SubjectDB.checkYAS(textFieldCourseID.getText());
-        if(arrayAccount[0] >= arraySubject[0] && arrayAccount[1] >= arraySubject[1]){
+        int totalAccount = (arrayAccount[0] * 2) + arrayAccount[1];
+        int totalSubject = (arraySubject[0] * 2) + arraySubject[1];
+        System.out.println("Account: " + totalAccount);
+        System.out.println("Subject: " + totalSubject);
+        if(totalAccount  >= totalSubject){
             if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
                 showDetails.setText("");
                 SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit(),"pass");
@@ -160,7 +173,9 @@ public class SubjectsPassController {
     public void fBtn(){
         int arrayAccount[] = AccountDB.checkYAS();
         int arraySubject[] = SubjectDB.checkYAS(textFieldCourseID.getText());
-        if(arrayAccount[0] >= arraySubject[0] && arrayAccount[1] >= arraySubject[1]){
+        int totalAccount = (arrayAccount[0] * 2) + arrayAccount[1];
+        int totalSubject = (arraySubject[0] * 2) + arraySubject[1];
+        if(totalAccount  >= totalSubject){
             if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
                 System.out.println("if");
                 showDetails.setText("");

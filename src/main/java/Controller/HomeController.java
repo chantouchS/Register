@@ -37,18 +37,29 @@ public class HomeController {
     ObservableList<Integer> yearList = FXCollections.observableArrayList(1,2,3,4);
     ObservableList<Integer> semesterList = FXCollections.observableArrayList(1,2);
 
+
     @FXML
     public void initialize(){
         save.setVisible(false);
         alert.setText("");
         year.getItems().addAll(yearList);
         semester.getItems().addAll(semesterList);
+        setResizeable();
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println(tableView.getSelectionModel().getSelectedItem());
             }
         });
+    }
+
+    public void setResizeable()
+    {
+        courseID.setResizable(false);
+        cTitle.setResizable(false);
+        credits.setResizable(false);
+        preCourse.setResizable(false);
+        withCourseID.setResizable(false);
     }
     @FXML
     public void saveSubjectsBtn(ActionEvent event) throws IOException {
@@ -97,6 +108,7 @@ public class HomeController {
 //            for(Subject s:ob)
 //           // for(Object object: tableView.getItems().stream().forEach(o);)
             tableView.setItems(SubjectDB.getAllSubjects(year.getValue(),semester.getValue()));
+            alert.setText("");
             System.out.println();
         }
     }

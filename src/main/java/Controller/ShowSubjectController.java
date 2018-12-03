@@ -35,6 +35,19 @@ public class ShowSubjectController {
         difficult.setCellValueFactory(new PropertyValueFactory<Subject,Pane>("difficultPane"));
         withCourseID.setCellValueFactory(new PropertyValueFactory<Subject,String>("duoCourseID"));
         tableView.setItems(subjectDB.getAllSubjects());
+        setResizeable();
+    }
+
+    public void setResizeable()
+    {
+        semester.setResizable(false);
+        year.setResizable(false);
+        courseID.setResizable(false);
+        courseTitle.setResizable(false);
+        credit.setResizable(false);
+        preCourse.setResizable(false);
+        withCourseID.setResizable(false);
+        difficult.setResizable(false);
     }
     @FXML
     public void create(ActionEvent event) throws IOException {
