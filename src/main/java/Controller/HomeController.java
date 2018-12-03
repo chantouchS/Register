@@ -10,10 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,9 +25,10 @@ import java.util.ArrayList;
 
 public class HomeController {
     private Subject subjectSelection;
+    @FXML protected Label alert;
     @FXML protected ChoiceBox<Integer> year,semester;
     @FXML protected ImageView homeIcon,kuSign,course,subject;
-    @FXML protected Button yourCourse,subjects,home,show,save;
+    @FXML protected Button yourCourse,subjects,home,show,save,saveSubject;
     @FXML protected TableView<Subject> tableView;
     @FXML protected TableColumn courseID,cTitle,credits,preCourse,withCourseID;
     @FXML protected TableColumn<Subject,Pane> difficult;
@@ -41,6 +39,8 @@ public class HomeController {
 
     @FXML
     public void initialize(){
+        save.setVisible(false);
+        alert.setText("");
         year.getItems().addAll(yearList);
         semester.getItems().addAll(semesterList);
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -49,6 +49,14 @@ public class HomeController {
                 System.out.println(tableView.getSelectionModel().getSelectedItem());
             }
         });
+    }
+    @FXML
+    public void saveSubjectsBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
     }
     @FXML
     public void yourCourseBtn(ActionEvent event) throws IOException {
@@ -72,12 +80,13 @@ public class HomeController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-        stage.setScene(new Scene(loader.load(),1080,720));
+        stage.setScene(new Scene(loader.load(),1303,720));
         stage.show();
     }
     @FXML
     public void showSubjectBtn(){
         if(year.getValue() != null && semester.getValue() != null){
+            save.setVisible(true);
             courseID.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("courseID"));
             cTitle.setCellValueFactory(new PropertyValueFactory<Subject,String>("courseTitle"));
             preCourse.setCellValueFactory(new PropertyValueFactory<Subject,String>("preCourse"));
@@ -93,34 +102,48 @@ public class HomeController {
     }
     @FXML
     public void saveBtn(ActionEvent event) throws IOException {
-        subjectSelection = tableView.getSelectionModel().getSelectedItem();
-        //System.out.println(subjectSelection);
-        String courseID = subjectSelection.getCourseID();
-        String courseTitle = subjectSelection.getCourseTitle();
-        String preCourse = subjectSelection.getPreCourse();
-        int year = subjectSelection.getYear();
-        int semester = subjectSelection.getSemester();
-        int credit = subjectSelection.getCredit();
-        String difficult = subjectSelection.getDifficult();
-        String duoCourseID = subjectSelection.getDuoCourseID();
-        //System.out.println(courseID);
-        SubjectPlanDB.saveWantToStudy(courseID,courseTitle,preCourse,year,semester,credit,difficult,duoCourseID);
-        //System.out.println(subjectSelection.getDuoCourseID());
-        if(!subjectSelection.getDuoCourseID().equals("-")){
-            subjectSelection =  SubjectDB.getDuoCourseID(subjectSelection.getDuoCourseID());
-            if(subjectSelection != null){
-                String courseID2 = subjectSelection.getCourseID();
-                String courseTitle2 = subjectSelection.getCourseTitle();
-                String preCourse2 = subjectSelection.getPreCourse();
-                int year2 = subjectSelection.getYear();
-                int semester2 = subjectSelection.getSemester();
-                int credit2 = subjectSelection.getCredit();
-                String difficult2 = subjectSelection.getDifficult();
-                String duoCourseID2 = subjectSelection.getDuoCourseID();
-                SubjectPlanDB.saveWantToStudy(courseID2,courseTitle2,preCourse2,year2,semester2,credit2,difficult2,duoCourseID2);
+        if (year.getValue() != null && semester.getValue() != null) {
+            subjectSelection = tableView.getSelectionModel().getSelectedItem();
+            try{
+                if (SubjectPlanDB.getCheckCourseID(subjectSelection.getCourseID()) && subjectSelection != null) {
+                    String courseID = subjectSelection.getCourseID();
+                    String courseTitle = subjectSelection.getCourseTitle();
+                    String preCourse = subjectSelection.getPreCourse();
+                    int year = subjectSelection.getYear();
+                    int semester = subjectSelection.getSemester();
+                    int credit = subjectSelection.getCredit();
+                    String difficult = subjectSelection.getDifficult();
+                    String duoCourseID = subjectSelection.getDuoCourseID();
+                    //System.out.println(courseID);
+                    SubjectPlanDB.saveWantToStudy(courseID, courseTitle, preCourse, year, semester, credit, difficult, duoCourseID);
+                    //System.out.println(subjectSelection.getDuoCourseID());
+                    if (!subjectSelection.getDuoCourseID().equals("-")) {
+                        System.out.println("if2");
+                        System.out.println(subjectSelection.getDuoCourseID());
+                        subjectSelection = SubjectDB.getDuoCourseID(subjectSelection.getDuoCourseID());
+                        if (subjectSelection != null) {
+                            String courseID2 = subjectSelection.getCourseID();
+                            String courseTitle2 = subjectSelection.getCourseTitle();
+                            String preCourse2 = subjectSelection.getPreCourse();
+                            int year2 = subjectSelection.getYear();
+                            int semester2 = subjectSelection.getSemester();
+                            int credit2 = subjectSelection.getCredit();
+                            String difficult2 = subjectSelection.getDifficult();
+                            String duoCourseID2 = subjectSelection.getDuoCourseID();
+                            SubjectPlanDB.saveWantToStudy(courseID2, courseTitle2, preCourse2, year2, semester2, credit2, difficult2, duoCourseID2);
+                        }
+                    }
+                    goToShowSaveSubject(event);
+                }
+                else {
+                    alert.setText("You already have save this subject.");
+                }
             }
+            catch (Exception e){
+                alert.setText("Please select subject");
+            }
+
         }
-        goToShowSaveSubject(event);
     }
     @FXML
     public void goToShowSaveSubject(ActionEvent event) throws IOException {

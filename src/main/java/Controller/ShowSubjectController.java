@@ -19,7 +19,7 @@ import java.io.IOException;
 public class ShowSubjectController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     private SubjectDB subjectDB;
-    @FXML protected Button home,createSubject,delete,course,subject;
+    @FXML protected Button home,createSubject,delete,course,subject,saveSubject;
     @FXML private TableView<Subject> tableView;
     @FXML protected TableColumn semester,year,courseID,courseTitle,credit,preCourse,difficult,withCourseID;
 
@@ -32,7 +32,7 @@ public class ShowSubjectController {
         courseTitle.setCellValueFactory(new PropertyValueFactory<Subject,String>("courseTitle"));
         credit.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("credit"));
         preCourse.setCellValueFactory(new PropertyValueFactory<Subject,String>("preCourse"));
-        difficult.setCellValueFactory(new PropertyValueFactory<Subject,Pane>("difficult"));
+        difficult.setCellValueFactory(new PropertyValueFactory<Subject,Pane>("difficultPane"));
         withCourseID.setCellValueFactory(new PropertyValueFactory<Subject,String>("duoCourseID"));
         tableView.setItems(subjectDB.getAllSubjects());
     }
@@ -46,9 +46,12 @@ public class ShowSubjectController {
     }
     @FXML
     public void delete(){
-        String courseID = tableView.getSelectionModel().getSelectedItem().getCourseID();
-        subjectDB.deleteSubject(courseID);
-        tableView.setItems(subjectDB.getAllSubjects());
+        if(tableView.getSelectionModel().getSelectedItem() != null){
+            String courseID = tableView.getSelectionModel().getSelectedItem().getCourseID();
+            subjectDB.deleteSubject(courseID);
+            tableView.setItems(subjectDB.getAllSubjects());
+        }
+
     }
 
     @FXML
@@ -74,6 +77,14 @@ public class ShowSubjectController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Subject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+    @FXML
+    public void saveSubjectsBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }

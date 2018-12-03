@@ -1,5 +1,6 @@
 package Controller;
 
+import database.AccountDB;
 import database.SubjectDB;
 import database.SubjectPassDB;
 import javafx.collections.FXCollections;
@@ -23,10 +24,10 @@ import java.util.TreeSet;
 public class SubjectsPassController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     @FXML protected TextField textFieldCourseID;
-    @FXML protected Button find,pass,home,course,subjects;
-    @FXML protected TableView passTableView;
+    @FXML protected Button find,pass,home,course,subjects,f,saveSubject,delete;
+    @FXML protected TableView<SubjectPass> passTableView;
     @FXML protected Label showDetails,showErrorDetails;
-    @FXML protected TableColumn courseID,courseTitle,credit;
+    @FXML protected TableColumn courseID,courseTitle,credit,status;
 
     private SubjectDB subjectDB;
     private Subject subject;
@@ -34,24 +35,27 @@ public class SubjectsPassController {
     //private Set<String> courseIDSet = new TreeSet<>(courseIDA);
     //ObservableList<String> courseIDObserve = FXCollections.observableArrayList(courseIDSet);
 
-    private ArrayList<String> subjectPass = SubjectPassDB.getSubjectPass();
-    ObservableList<String> addToTable = FXCollections.observableArrayList(subjectPass);
+    private ArrayList<SubjectPass> subjectPass = SubjectPassDB.getSubjectPass();
+    ObservableList<SubjectPass> addToTable = FXCollections.observableArrayList(subjectPass);
 
     @FXML
     public void initialize(){
         courseID.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseID"));
         courseTitle.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseTitle"));
         credit.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("credit"));
+        status.setCellValueFactory(new PropertyValueFactory<Subject,String>("status"));
         passTableView.setItems(addToTable);
-        pass.setVisible(false);
+        setVisibleFBtn();
+        setVisiblePassBtn();
     }
     @FXML
     public void findBtn(){
         if(showErrorDetails.getText().equals("Please click find button.")){
             showErrorDetails.setText("");
         }
-        if(textFieldCourseID.getText() != null){
+        if(!textFieldCourseID.getText().equals("")){
             pass.setVisible(true);
+            f.setVisible(true);
             showErrorDetails.setText("");
             subject = subjectDB.getSubject(textFieldCourseID.getText());
             //System.out.println(subject.getCourseID());
@@ -70,11 +74,13 @@ public class SubjectsPassController {
             }
             else{
                 pass.setVisible(false);
+                f.setVisible(false);
                 showDetails.setText("Cannot Find Subject.");
             }
         }
         else{
             pass.setVisible(false);
+            f.setVisible(false);
             showErrorDetails.setText("");
             showDetails.setText("Please fill in course id");
         }
@@ -82,71 +88,153 @@ public class SubjectsPassController {
     }
     @FXML
     public void passBtn(){
-        if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
-            showDetails.setText("");
-            SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit());
-//            courseID.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseID"));
-//            courseTitle.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseTitle"));
-//            credit.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("credit"));
-            //System.out.println("111");
-            showErrorDetails.setText("");
-            passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
-        }
-        else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
-            System.out.println("else if");
-            System.out.println("12123");
-            showDetails.setText("You pass this subject.");
-            textFieldCourseID.setText("");
-        }
-        else{
-            if(textFieldCourseID.getText().equals(subject.getCourseID())){
-                int countSubject = 0;
-                String preCourse1 = "";
-                String preCourse2 = "";
-                String preCourse3 = "";
-                boolean check = false;
-                ArrayList<String> pCourseFromDB = SubjectPassDB.getSubjectNeedToStudy();
-                if(subject.getPreCourse().contains(",")){
-                    String[] pCourseSplit = subject.getPreCourse().split(",");
-                    for(String pCourse:pCourseSplit){
-                        countSubject+=1;
-                        for (String pCourseDB:pCourseFromDB){
-                            if(pCourseDB.equals(pCourse)){
-                                check = true;
-                            }
-                        }
-                        if(!check && countSubject == 1){
-                            preCourse1 = pCourse;
-                        }
-                        else if(!check && countSubject == 2){
-                            preCourse2 = pCourse;
-                        }
-                        else if(!check && countSubject == 3){
-                            preCourse3 = pCourse;
-                        }
-                        check = false;
-                    }
-                    if(countSubject == 2){
-                        showErrorDetails.setText("This subject need to study " + preCourse1 + " and " + preCourse2 + ".");
-                    }
-                    else if(countSubject == 3){
-                        showErrorDetails.setText("This subject need to study " + preCourse1 + ", " + preCourse2 + "\nand " + preCourse3 + ".");
-                    }
-                }
-                else {
-                    if(!pCourseFromDB.contains(subject.getPreCourse())){
-                        showErrorDetails.setText("This subject need to study " + subject.getPreCourse() + ".");
-                    }
-                }
+        int arrayAccount[] = AccountDB.checkYAS();
+        int arraySubject[] = SubjectDB.checkYAS(textFieldCourseID.getText());
+        if(arrayAccount[0] >= arraySubject[0] && arrayAccount[1] >= arraySubject[1]){
+            if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
+                showDetails.setText("");
+                SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit(),"pass");
+                showErrorDetails.setText("");
+                passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
+            }
+            else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
+                showDetails.setText("You pass or F this subject.");
+                textFieldCourseID.setText("");
             }
             else{
-                showErrorDetails.setText("Please click find button.");
-            }
+                if(textFieldCourseID.getText().equals(subject.getCourseID())){
+                    int countSubject = 0;
+                    String preCourse1 = "";
+                    String preCourse2 = "";
+                    String preCourse3 = "";
+                    boolean check = false;
+                    ArrayList<String> pCourseFromDB = SubjectPassDB.getSubjectNeedToStudy();
+                    if(subject.getPreCourse().contains(",")){
+                        String[] pCourseSplit = subject.getPreCourse().split(",");
+                        for(String pCourse:pCourseSplit){
+                            countSubject+=1;
+                            for (String pCourseDB:pCourseFromDB){
+                                if(pCourseDB.equals(pCourse)){
+                                    check = true;
+                                }
+                            }
+                            if(!check && countSubject == 1){
+                                preCourse1 = pCourse;
+                            }
+                            else if(!check && countSubject == 2){
+                                preCourse2 = pCourse;
+                            }
+                            else if(!check && countSubject == 3){
+                                preCourse3 = pCourse;
+                            }
+                            check = false;
+                        }
+                        if(countSubject == 2){
+                            showErrorDetails.setText("This subject need to study " + preCourse1 + " and " + preCourse2 + ".");
+                        }
+                        else if(countSubject == 3){
+                            showErrorDetails.setText("This subject need to study " + preCourse1 + ", " + preCourse2 + "\nand " + preCourse3 + ".");
+                        }
+                    }
+                    else {
+                        if(!pCourseFromDB.contains(subject.getPreCourse())){
+                            showErrorDetails.setText("This subject need to study " + subject.getPreCourse() + ".");
+                        }
+                    }
+                }
+                else{
+                    showErrorDetails.setText("Please click find button.");
+                }
 
+            }
+        }
+        else {
+            showErrorDetails.setText("Your year and semester are not enough.");
         }
         setVisiblePassBtn();
+        f.setVisible(false);
+        textFieldCourseID.setText("");
 
     }
+    @FXML
+    public void fBtn(){
+        int arrayAccount[] = AccountDB.checkYAS();
+        int arraySubject[] = SubjectDB.checkYAS(textFieldCourseID.getText());
+        if(arrayAccount[0] >= arraySubject[0] && arrayAccount[1] >= arraySubject[1]){
+            if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
+                System.out.println("if");
+                showDetails.setText("");
+                SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit(),"F");
+                showErrorDetails.setText("");
+                passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
+            }
+            else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
+                showDetails.setText("You pass or F this subject.");
+                textFieldCourseID.setText("");
+            }
+            else{
+                if(textFieldCourseID.getText().equals(subject.getCourseID())){
+                    int countSubject = 0;
+                    String preCourse1 = "";
+                    String preCourse2 = "";
+                    String preCourse3 = "";
+                    boolean check = false;
+                    ArrayList<String> pCourseFromDB = SubjectPassDB.getSubjectNeedToStudy();
+                    if(subject.getPreCourse().contains(",")){
+                        String[] pCourseSplit = subject.getPreCourse().split(",");
+                        for(String pCourse:pCourseSplit){
+                            countSubject+=1;
+                            for (String pCourseDB:pCourseFromDB){
+                                if(pCourseDB.equals(pCourse)){
+                                    check = true;
+                                }
+                            }
+                            if(!check && countSubject == 1){
+                                preCourse1 = pCourse;
+                            }
+                            else if(!check && countSubject == 2){
+                                preCourse2 = pCourse;
+                            }
+                            else if(!check && countSubject == 3){
+                                preCourse3 = pCourse;
+                            }
+                            check = false;
+                        }
+                        if(countSubject == 2){
+                            showErrorDetails.setText("This subject need to study " + preCourse1 + " and " + preCourse2 + ".");
+                        }
+                        else if(countSubject == 3){
+                            showErrorDetails.setText("This subject need to study " + preCourse1 + ", " + preCourse2 + "\nand " + preCourse3 + ".");
+                        }
+                    }
+                    else {
+                        if(!pCourseFromDB.contains(subject.getPreCourse())){
+                            showErrorDetails.setText("This subject need to study " + subject.getPreCourse() + ".");
+                        }
+                    }
+                }
+                else{
+                    showErrorDetails.setText("Please click find button.");
+                }
+
+            }
+        }
+        else {
+            showErrorDetails.setText("Your year and semester are not enough.");
+        }
+        setVisibleFBtn();
+        pass.setVisible(false);
+        textFieldCourseID.setText("");
+    }
+    @FXML
+    public void deleteBtn(){
+        if(passTableView.getSelectionModel().getSelectedItem() != null){
+            String courseID = passTableView.getSelectionModel().getSelectedItem().getCourseID();
+            SubjectPassDB.deleteSubjectPass(courseID);
+            passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
+        }
+    }
+
     @FXML
     public void homeBtn(ActionEvent event) throws IOException {
         Button button = (Button) event.getSource();
@@ -157,6 +245,9 @@ public class SubjectsPassController {
     }
     public void setVisiblePassBtn(){
         pass.setVisible(false);
+    }
+    public void setVisibleFBtn(){
+        f.setVisible(false);
     }
 
     @FXML
@@ -176,5 +267,12 @@ public class SubjectsPassController {
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }
-
+    @FXML
+    public void saveSubjectsBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
 }

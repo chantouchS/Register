@@ -48,6 +48,7 @@ public class SubjectPlanDB {
                     String withCourseID = resultSet.getString("WithCourseID");
                     observableList.add(new SubjectPlan(courseID,courseTitle,preCourse,year,semester,credit,difficult,withCourseID));
                 }
+                connection.close();
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -55,5 +56,45 @@ public class SubjectPlanDB {
             e.printStackTrace();
         }
         return observableList;
+    }
+    public static boolean getCheckCourseID(String courseID){
+        boolean check = true;
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "select CourseID from SubjectPlan";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String dbCourseID = resultSet.getString("CourseID");
+                    if (dbCourseID.equals(courseID)){
+                        check = false;
+                    }
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+    public static void deleteSubjectPlan(String courseID){
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query  = "Delete from SubjectPlan where CourseID == '" + courseID + "'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

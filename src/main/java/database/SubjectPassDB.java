@@ -83,10 +83,10 @@ public class SubjectPassDB {
                             }
                         }
                     }
-                    statement.close();
-                    resultSet.close();
-                    connection.close();
                 }
+                statement.close();
+                resultSet.close();
+                connection.close();
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -95,16 +95,17 @@ public class SubjectPassDB {
         }
         return checkStudy;
     }
-    public static void saveSubjectPass(String courseID, String courseTitle, int credit){
+    public static void saveSubjectPass(String courseID, String courseTitle, int credit,String status){
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if(connection != null){
-                String query = "insert into SubjectPass (CourseID,CourseTitle,Credit) values" +
-                        "('" + courseID + "' , '" + courseTitle + "' , '" + credit + "')";
+                String query = "insert into SubjectPass (CourseID,CourseTitle,Credit,Status) values" +
+                        "('" + courseID + "' , '" + courseTitle + "' , '" + credit + "' , '" + status + "')";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 connection.close();
+
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -125,7 +126,8 @@ public class SubjectPassDB {
                     String courseID = resultSet.getString("CourseID");
                     String courseTitle = resultSet.getString("CourseTitle");
                     int credit = resultSet.getInt("Credit");
-                    subjectPasses.add(new SubjectPass(courseID,courseTitle,credit));
+                    String status = resultSet.getString("Status");
+                    subjectPasses.add(new SubjectPass(courseID,courseTitle,credit,status));
                     //System.out.println(courseID + " " + courseTitle + " " + credit);
                 }
                 statement.close();
@@ -179,7 +181,8 @@ public class SubjectPassDB {
                     String courseID = resultSet.getString("CourseID");
                     String courseTitle = resultSet.getString("CourseTitle");
                     int credit = resultSet.getInt("Credit");
-                    subjectPasses.add(new SubjectPass(courseID,courseTitle,credit));
+                    String status = resultSet.getString("Status");
+                    subjectPasses.add(new SubjectPass(courseID,courseTitle,credit,status));
                 }
                 statement.close();
                 resultSet.close();
@@ -191,5 +194,21 @@ public class SubjectPassDB {
             ex.printStackTrace();
         }
         return subjectPasses;
+    }
+    public static void deleteSubjectPass(String courseID){
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query  = "Delete from SubjectPass where CourseID == '" + courseID + "'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

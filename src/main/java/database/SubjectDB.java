@@ -93,8 +93,8 @@ public class SubjectDB {
                 String query  = "Delete from Subjects where CourseID == '" + courseID + "'";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
+                connection.close();
             }
-            connection.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -240,8 +240,8 @@ public class SubjectDB {
                     String dc = resultSet.getString("WithCourseID");
                     System.out.println("duoCourseID = " + duoCourseID);
                     System.out.println("courseTitle = " + courseTitle);
-                    if(duoCourseID.equals(courseTitle)){
-                        System.out.println(courseTitle);
+                    if(duoCourseID.equals(courseID)){
+                        System.out.println(courseID);
                         subject = new Subject(semesterDB,yearDB,courseID,courseTitle,credit,preCourseDB,difficult,dc);
                     }
                 }
@@ -253,5 +253,33 @@ public class SubjectDB {
         }
         //System.out.println(subject.toString());
         return subject;
+    }
+    public static int[] checkYAS(String courseID){
+        int[] check = new int[2];
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "select * from Subjects";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String courseIDDB = resultSet.getString("CourseID");
+                    int yearDB = resultSet.getInt("Year");
+                    int semesterDB = resultSet.getInt("Semester");
+                    if(courseIDDB.equals(courseID)){
+                        check[0] = yearDB;
+                        check[1] = semesterDB;
+                    }
+
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
     }
 }

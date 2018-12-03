@@ -81,5 +81,11 @@
             <Font name="Cordia New Bold" size="22.0" />
          </font>
       </Button>
+      <Button fx:id="saveSubject" alignment="CENTER" layoutX="-1.0" layoutY="282.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="Save" textAlignment="CENTER" textFill="#cccbcb">
+         <font>
+            <Font name="Cordia New" size="22.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="16.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>
