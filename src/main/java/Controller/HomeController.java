@@ -40,7 +40,14 @@ public class HomeController {
 
     @FXML
     public void initialize(){
-        save.setVisible(false);
+        courseID.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("courseID"));
+        cTitle.setCellValueFactory(new PropertyValueFactory<Subject,String>("courseTitle"));
+        preCourse.setCellValueFactory(new PropertyValueFactory<Subject,String>("preCourse"));
+        credits.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("credit"));
+        difficult.setCellValueFactory(new PropertyValueFactory<Subject,Pane>("difficultPane"));
+        withCourseID.setCellValueFactory(new PropertyValueFactory<Subject,String>("duoCourseID"));
+        tableView.setItems(SubjectDB.getAllSubjects());
+        //save.setVisible(false);
         alert.setText("");
         year.getItems().addAll(yearList);
         semester.getItems().addAll(semesterList);
@@ -114,47 +121,47 @@ public class HomeController {
     }
     @FXML
     public void saveBtn(ActionEvent event) throws IOException {
-        if (year.getValue() != null && semester.getValue() != null) {
-            subjectSelection = tableView.getSelectionModel().getSelectedItem();
-            try{
-                if (SubjectPlanDB.getCheckCourseID(subjectSelection.getCourseID()) && subjectSelection != null) {
-                    String courseID = subjectSelection.getCourseID();
-                    String courseTitle = subjectSelection.getCourseTitle();
-                    String preCourse = subjectSelection.getPreCourse();
-                    int year = subjectSelection.getYear();
-                    int semester = subjectSelection.getSemester();
-                    int credit = subjectSelection.getCredit();
-                    String difficult = subjectSelection.getDifficult();
-                    String duoCourseID = subjectSelection.getDuoCourseID();
-                    //System.out.println(courseID);
-                    SubjectPlanDB.saveWantToStudy(courseID, courseTitle, preCourse, year, semester, credit, difficult, duoCourseID);
-                    //System.out.println(subjectSelection.getDuoCourseID());
-                    if (!subjectSelection.getDuoCourseID().equals("-")) {
-                        System.out.println("if2");
-                        System.out.println(subjectSelection.getDuoCourseID());
-                        subjectSelection = SubjectDB.getDuoCourseID(subjectSelection.getDuoCourseID());
-                        if (subjectSelection != null) {
-                            String courseID2 = subjectSelection.getCourseID();
-                            String courseTitle2 = subjectSelection.getCourseTitle();
-                            String preCourse2 = subjectSelection.getPreCourse();
-                            int year2 = subjectSelection.getYear();
-                            int semester2 = subjectSelection.getSemester();
-                            int credit2 = subjectSelection.getCredit();
-                            String difficult2 = subjectSelection.getDifficult();
-                            String duoCourseID2 = subjectSelection.getDuoCourseID();
-                            SubjectPlanDB.saveWantToStudy(courseID2, courseTitle2, preCourse2, year2, semester2, credit2, difficult2, duoCourseID2);
-                        }
+//        if (year.getValue() != null && semester.getValue() != null) {
+//
+//        }
+        subjectSelection = tableView.getSelectionModel().getSelectedItem();
+        try{
+            if (SubjectPlanDB.getCheckCourseID(subjectSelection.getCourseID()) && subjectSelection != null) {
+                String courseID = subjectSelection.getCourseID();
+                String courseTitle = subjectSelection.getCourseTitle();
+                String preCourse = subjectSelection.getPreCourse();
+                int year = subjectSelection.getYear();
+                int semester = subjectSelection.getSemester();
+                int credit = subjectSelection.getCredit();
+                String difficult = subjectSelection.getDifficult();
+                String duoCourseID = subjectSelection.getDuoCourseID();
+                //System.out.println(courseID);
+                SubjectPlanDB.saveWantToStudy(courseID, courseTitle, preCourse, year, semester, credit, difficult, duoCourseID);
+                //System.out.println(subjectSelection.getDuoCourseID());
+                if (!subjectSelection.getDuoCourseID().equals("-")) {
+                    System.out.println("if2");
+                    System.out.println(subjectSelection.getDuoCourseID());
+                    subjectSelection = SubjectDB.getDuoCourseID(subjectSelection.getDuoCourseID());
+                    if (subjectSelection != null) {
+                        String courseID2 = subjectSelection.getCourseID();
+                        String courseTitle2 = subjectSelection.getCourseTitle();
+                        String preCourse2 = subjectSelection.getPreCourse();
+                        int year2 = subjectSelection.getYear();
+                        int semester2 = subjectSelection.getSemester();
+                        int credit2 = subjectSelection.getCredit();
+                        String difficult2 = subjectSelection.getDifficult();
+                        String duoCourseID2 = subjectSelection.getDuoCourseID();
+                        SubjectPlanDB.saveWantToStudy(courseID2, courseTitle2, preCourse2, year2, semester2, credit2, difficult2, duoCourseID2);
                     }
-                    goToShowSaveSubject(event);
                 }
-                else {
-                    alert.setText("You already have save this subject.");
-                }
+                goToShowSaveSubject(event);
             }
-            catch (Exception e){
-                alert.setText("Please select subject");
+            else {
+                alert.setText("You already have save this subject.");
             }
-
+        }
+        catch (Exception e){
+            alert.setText("Please select subject");
         }
     }
     @FXML

@@ -25,7 +25,7 @@ public class CreateSubjectController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     @FXML protected ChoiceBox<String> year,semester,credit,preCourse1,preCourse2,preCourse3,difficult;
     @FXML protected TextField courseId,courseTitle,duoCourse;
-    @FXML protected Button addMore,addMoreB3,back,create,home,course,subjectB;
+    @FXML protected Button addMore,addMoreB3,back,create,home,course,subjectB,saveSubject;
     @FXML protected Label showCourseID,showCourseTitle,showError;
     private SubjectDB subjectDB;
     private ArrayList<String> courseArrayList = subjectDB.getCourseID();
@@ -181,5 +181,12 @@ public class CreateSubjectController {
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }
-
+    @FXML
+    public void saveSubjectsBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
 }
