@@ -3,6 +3,7 @@ package Controller;
 import database.AccountDB;
 import database.SubjectDB;
 import database.SubjectPassDB;
+import database.SubjectPlanDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +24,13 @@ import java.util.TreeSet;
 
 public class SubjectsPassController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
-    @FXML protected TextField textFieldCourseID;
+    @FXML protected ChoiceBox<String> courseIDC;
     @FXML protected Button find,pass,home,course,subjects,f,saveSubject,delete;
     @FXML protected TableView<SubjectPass> passTableView;
     @FXML protected Label showDetails,showErrorDetails;
     @FXML protected TableColumn courseID,courseTitle,credit,status;
+
+    ObservableList<String> courseIDList = SubjectDB.getCourseIDOb();
 
     private SubjectDB subjectDB;
     private Subject subject;
@@ -40,6 +43,7 @@ public class SubjectsPassController {
 
     @FXML
     public void initialize(){
+        courseIDC.getItems().addAll(courseIDList);
         courseID.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseID"));
         courseTitle.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseTitle"));
         credit.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("credit"));
@@ -62,14 +66,14 @@ public class SubjectsPassController {
         if(showErrorDetails.getText().equals("Please click find button.")){
             showErrorDetails.setText("");
         }
-        if(!textFieldCourseID.getText().equals("")){
+        if(courseIDC.getValue() != null){
             pass.setVisible(true);
             f.setVisible(true);
             showErrorDetails.setText("");
-            subject = subjectDB.getSubject(textFieldCourseID.getText());
+            subject = subjectDB.getSubject(courseIDC.getValue());
             //System.out.println(subject.getCourseID());
             if(subject != null){
-                if(textFieldCourseID.getText().equals(subject.getCourseID())){
+                if(courseIDC.getValue().equals(subject.getCourseID())){
                     //System.out.println(subject.getCourseID());
                     showDetails.setText("Name: " + subject.getCourseTitle() + "\n"
                             + "ID: " + subject.getCourseID() + "\n"
@@ -98,24 +102,25 @@ public class SubjectsPassController {
     @FXML
     public void passBtn(){
         int arrayAccount[] = AccountDB.checkYAS();
-        int arraySubject[] = SubjectDB.checkYAS(textFieldCourseID.getText());
+        int arraySubject[] = SubjectDB.checkYAS(courseIDC.getValue());
         int totalAccount = (arrayAccount[0] * 2) + arrayAccount[1];
         int totalSubject = (arraySubject[0] * 2) + arraySubject[1];
         System.out.println("Account: " + totalAccount);
         System.out.println("Subject: " + totalSubject);
         if(totalAccount  >= totalSubject){
-            if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
+            if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(courseIDC.getValue()) && courseIDC.getValue().equals(subject.getCourseID())){
                 showDetails.setText("");
                 SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit(),"pass");
                 showErrorDetails.setText("");
                 passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
+                SubjectPlanDB.deleteSubjectPlan(subject.getCourseID());
             }
-            else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
+            else if(!SubjectPassDB.getCheckCourseID(courseIDC.getValue())){
                 showDetails.setText("You pass or F this subject.");
-                textFieldCourseID.setText("");
+                //textFieldCourseID.setText("");
             }
             else{
-                if(textFieldCourseID.getText().equals(subject.getCourseID())){
+                if(courseIDC.getValue().equals(subject.getCourseID())){
                     int countSubject = 0;
                     String preCourse1 = "";
                     String preCourse2 = "";
@@ -166,29 +171,29 @@ public class SubjectsPassController {
         }
         setVisiblePassBtn();
         f.setVisible(false);
-        textFieldCourseID.setText("");
+        //textFieldCourseID.setText("");
 
     }
     @FXML
     public void fBtn(){
         int arrayAccount[] = AccountDB.checkYAS();
-        int arraySubject[] = SubjectDB.checkYAS(textFieldCourseID.getText());
+        int arraySubject[] = SubjectDB.checkYAS(courseIDC.getValue());
         int totalAccount = (arrayAccount[0] * 2) + arrayAccount[1];
         int totalSubject = (arraySubject[0] * 2) + arraySubject[1];
         if(totalAccount  >= totalSubject){
-            if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(textFieldCourseID.getText()) && textFieldCourseID.getText().equals(subject.getCourseID())){
+            if(SubjectPassDB.getCheck(subject.getPreCourse()) && SubjectPassDB.getCheckCourseID(courseIDC.getValue()) && courseIDC.getValue().equals(subject.getCourseID())){
                 System.out.println("if");
                 showDetails.setText("");
                 SubjectPassDB.saveSubjectPass(subject.getCourseID(),subject.getCourseTitle(),subject.getCredit(),"F");
                 showErrorDetails.setText("");
                 passTableView.setItems(SubjectPassDB.getSubjectPassToTable());
             }
-            else if(!SubjectPassDB.getCheckCourseID(textFieldCourseID.getText())){
+            else if(!SubjectPassDB.getCheckCourseID(courseIDC.getValue())){
                 showDetails.setText("You pass or F this subject.");
-                textFieldCourseID.setText("");
+                //textFieldCourseID.setText("");
             }
             else{
-                if(textFieldCourseID.getText().equals(subject.getCourseID())){
+                if(courseIDC.getValue().equals(subject.getCourseID())){
                     int countSubject = 0;
                     String preCourse1 = "";
                     String preCourse2 = "";
@@ -239,7 +244,7 @@ public class SubjectsPassController {
         }
         setVisibleFBtn();
         pass.setVisible(false);
-        textFieldCourseID.setText("");
+        //textFieldCourseID.setText("");
     }
     @FXML
     public void deleteBtn(){

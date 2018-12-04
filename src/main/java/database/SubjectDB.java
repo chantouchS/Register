@@ -34,6 +34,30 @@ public class SubjectDB {
         }
         return courseSet;
     }
+
+    public static ObservableList<String> getCourseIDOb(){
+        ObservableList<String> courseSet = FXCollections.observableArrayList();
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "select CourseID from Subjects";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while(resultSet.next()){
+                    String course = resultSet.getString("CourseID");
+                    courseSet.add(course);
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courseSet;
+    }
+
     public static void saveSubjects(int semester,int year,String courseID,String courseTitle,int credit,String preCourse,String colorDifficult,String dc){
         System.out.println(preCourse);
         try {
