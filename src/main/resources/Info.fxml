@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.InfoController">
+   <children>
+      <Pane prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: #1a2224;">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="5.0" layoutY="5.0">
+               <image>
+                  <Image url="@image/KuSign.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="123.0" layoutY="16.0" text="Checking Registration" textFill="#cccbcb">
+               <font>
+                  <Font name="Cordia New Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="97.0" layoutY="104.0" text="Nattapat Chotiyarnnon">
+         <font>
+            <Font name="Cordia New Bold" size="30.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="years" layoutX="65.0" layoutY="186.0" prefHeight="25.0" prefWidth="50.0" />
+      <ChoiceBox fx:id="semester" layoutX="200.0" layoutY="186.0" prefWidth="50.0" />
+      <Label layoutX="25.0" layoutY="186.0" text="Year" textFill="#070707">
+         <font>
+            <Font name="Cordia New Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="186.0" text="Semester" textFill="#070707">
+         <font>
+            <Font name="Cordia New Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="info" alignment="CENTER" layoutX="287.0" layoutY="183.0" mnemonicParsing="false" onAction="#infoBtn" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #1a2224;" text="Info" textAlignment="CENTER" textFill="#cccbcb">
+         <font>
+            <Font name="Cordia New Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
