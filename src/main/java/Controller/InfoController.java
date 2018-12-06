@@ -43,14 +43,14 @@ public class InfoController {
             tmp = SubjectDB.getYearAndSemester(o.getCourseID());
             tmp[0] = tmp[0]*2 + tmp[1];
             int yearAccount = years.getValue() * 2 + semester.getValue();
-            if(tmp[0] != yearAccount){
+            if(tmp[0] > yearAccount){
                 SubjectPassDB.deleteAll();
             }
         }
         for(SubjectPlan o:subjectPlans){
             int yearSubject = o.getYear() * 2 + o.getSemester();
             int yearAccount = years.getValue() * 2 + semester.getValue();
-            if(yearAccount != yearSubject){
+            if(yearAccount <= yearSubject){
                 SubjectPlanDB.deleteAll();
             }
         }
