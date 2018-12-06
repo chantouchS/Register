@@ -142,20 +142,23 @@ public class HomeController {
 
                 //System.out.println(subjectSelection.getDuoCourseID());
                 if (!subjectSelection.getDuoCourseID().equals("-")) {
-                    System.out.println("if2");
-                    System.out.println(subjectSelection.getDuoCourseID());
-                    subjectSelection = SubjectDB.getDuoCourseID(subjectSelection.getDuoCourseID());
-                    if (subjectSelection != null) {
-                        String courseID2 = subjectSelection.getCourseID();
-                        String courseTitle2 = subjectSelection.getCourseTitle();
-                        String preCourse2 = subjectSelection.getPreCourse();
-                        int year2 = subjectSelection.getYear();
-                        int semester2 = subjectSelection.getSemester();
-                        int credit2 = subjectSelection.getCredit();
-                        String difficult2 = subjectSelection.getDifficult();
-                        String duoCourseID2 = subjectSelection.getDuoCourseID();
-                        SubjectPlanDB.saveWantToStudy(courseID2, courseTitle2, preCourse2, year2, semester2, credit2, difficult2, duoCourseID2);
+                    if(SubjectPlanDB.getCheckCourseID(subjectSelection.getDuoCourseID())){
+                        System.out.println("if2");
+//                    System.out.println(subjectSelection.getDuoCourseID());
+                        subjectSelection = SubjectDB.getDuoCourseID(subjectSelection.getDuoCourseID());
+                        if (subjectSelection != null) {
+                            String courseID2 = subjectSelection.getCourseID();
+                            String courseTitle2 = subjectSelection.getCourseTitle();
+                            String preCourse2 = subjectSelection.getPreCourse();
+                            int year2 = subjectSelection.getYear();
+                            int semester2 = subjectSelection.getSemester();
+                            int credit2 = subjectSelection.getCredit();
+                            String difficult2 = subjectSelection.getDifficult();
+                            String duoCourseID2 = subjectSelection.getDuoCourseID();
+                            SubjectPlanDB.saveWantToStudy(courseID2, courseTitle2, preCourse2, year2, semester2, credit2, difficult2, duoCourseID2);
+                        }
                     }
+//
                 }
                 goToShowSaveSubject(event);
             }
