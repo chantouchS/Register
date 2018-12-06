@@ -68,4 +68,19 @@ public class SubjectPlan {
     public Pane getDifficultPane() {
         return difficultPane;
     }
+
+    @Override
+    public String toString() {
+        return "SubjectPlan{" +
+                "courseID='" + courseID + '\'' +
+                ", courseTitle='" + courseTitle + '\'' +
+                ", preCourse='" + preCourse + '\'' +
+                ", year=" + year +
+                ", semester=" + semester +
+                ", credit=" + credit +
+                ", difficult='" + difficult + '\'' +
+                ", withCourseID='" + withCourseID + '\'' +
+                ", difficultPane=" + difficultPane +
+                '}';
+    }
 }

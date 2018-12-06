@@ -28,7 +28,7 @@ public class HomeController {
     @FXML protected Label alert;
     @FXML protected ChoiceBox<Integer> year,semester;
     @FXML protected ImageView homeIcon,kuSign,course,subject;
-    @FXML protected Button yourCourse,subjects,home,show,save,saveSubject;
+    @FXML protected Button yourCourse,subjects,home,show,save,saveSubject,logout;
     @FXML protected TableView<Subject> tableView;
     @FXML protected TableColumn courseID,cTitle,credits,preCourse,withCourseID;
     @FXML protected TableColumn<Subject,Pane> difficult;
@@ -51,6 +51,8 @@ public class HomeController {
         alert.setText("");
         year.getItems().addAll(yearList);
         semester.getItems().addAll(semesterList);
+        year.getSelectionModel().selectFirst();
+        semester.getSelectionModel().selectFirst();
         setResizeable();
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -137,6 +139,7 @@ public class HomeController {
                 String duoCourseID = subjectSelection.getDuoCourseID();
                 //System.out.println(courseID);
                 SubjectPlanDB.saveWantToStudy(courseID, courseTitle, preCourse, year, semester, credit, difficult, duoCourseID);
+
                 //System.out.println(subjectSelection.getDuoCourseID());
                 if (!subjectSelection.getDuoCourseID().equals("-")) {
                     System.out.println("if2");
@@ -169,6 +172,14 @@ public class HomeController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+    @FXML
+    public void logoutBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Info.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }

@@ -3,19 +3,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.parallel.Execution;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/Home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Info.fxml"));
         primaryStage.setTitle("Subject");
-        primaryStage.setScene(new Scene(root, 1303, 720));
+        primaryStage.setScene(new Scene(root, 400, 300));
         primaryStage.setResizable(false);
         primaryStage.show();
 

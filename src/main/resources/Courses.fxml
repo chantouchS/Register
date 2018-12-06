@@ -44,6 +44,11 @@
                   <Image url="@image/course.png" />
                </image>
             </ImageView>
+            <Button fx:id="logout" alignment="CENTER" layoutY="675.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="     Logout" textAlignment="CENTER" textFill="#cccbcb">
+               <font>
+                  <Font name="Cordia New" size="22.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane prefHeight="60.0" prefWidth="1080.0" style="-fx-background-color: #1a2224;">
@@ -80,16 +85,16 @@
       </Label>
       <Button fx:id="find" layoutX="964.0" layoutY="119.0" mnemonicParsing="false" onAction="#findBtn" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Find" textFill="WHITE" />
       <Label fx:id="showDetails" layoutX="736.0" layoutY="197.0" prefHeight="131.0" prefWidth="343.0" />
-      <Label fx:id="showErrorDetails" layoutX="736.0" layoutY="345.0" prefHeight="131.0" prefWidth="343.0" />
-      <Button fx:id="pass" layoutX="985.0" layoutY="490.0" mnemonicParsing="false" onAction="#passBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Pass" textFill="WHITE" />
-      <Button fx:id="f" layoutX="870.0" layoutY="490.0" mnemonicParsing="false" onAction="#fBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="F" textFill="WHITE" />
-      <Button fx:id="saveSubject" alignment="CENTER" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Save" textAlignment="CENTER" textFill="#cccbcb">
+      <Label fx:id="showErrorDetails" alignment="CENTER" contentDisplay="CENTER" layoutX="736.0" layoutY="345.0" prefHeight="131.0" prefWidth="343.0" />
+      <Button fx:id="pass" layoutX="929.0" layoutY="490.0" mnemonicParsing="false" onAction="#passBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="Pass" textFill="WHITE" />
+      <Button fx:id="f" layoutX="816.0" layoutY="490.0" mnemonicParsing="false" onAction="#fBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="F" textFill="WHITE" />
+      <Button fx:id="saveSubject" alignment="CENTER" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Plan" textAlignment="CENTER" textFill="#cccbcb">
          <font>
             <Font name="Cordia New" size="22.0" />
          </font>
       </Button>
       <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="17.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="delete" layoutX="755.0" layoutY="490.0" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="delete" textFill="WHITE" />
+      <Button fx:id="delete" layoutX="641.0" layoutY="590.0" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #1a2224; -fx-background-radius: 5;" text="delete" textFill="WHITE" />
       <ImageView fx:id="subjectI1" fitHeight="19.0" fitWidth="19.0" layoutX="15.0" layoutY="292.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/icons8-save-as-64.png" />

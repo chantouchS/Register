@@ -43,6 +43,11 @@
                   <Image url="@image/course.png" />
                </image>
             </ImageView>
+            <Button fx:id="logout" alignment="CENTER" layoutY="675.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="     Logout" textAlignment="CENTER" textFill="#cccbcb">
+               <font>
+                  <Font name="Cordia New" size="22.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane prefHeight="60.0" prefWidth="1247.0" style="-fx-background-color: #1a2224;">
@@ -81,7 +86,7 @@
             <Font name="Cordia New Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="saveSubject" alignment="CENTER" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Save" textAlignment="CENTER" textFill="#cccbcb">
+      <Button fx:id="saveSubject" alignment="CENTER" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Plan" textAlignment="CENTER" textFill="#cccbcb">
          <font>
             <Font name="Cordia New" size="22.0" />
          </font>

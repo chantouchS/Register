@@ -30,4 +30,37 @@ public class AccountDB {
         }
         return check;
     }
+    public static void delete(String name){
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager .getConnection(dbURL);
+            if(connection != null){
+                String query  = "Delete from Account where FirstName == '" + name + "'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void addAccount(String firstName,String lastName,int year,int semester){
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "insert into Account (FirstName,LastName,Year,Semester) values " +
+                        "('" + firstName + "' , '" + lastName + "' , '" + year  + "' , '" + semester + "')";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

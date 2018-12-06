@@ -19,13 +19,12 @@ import java.io.IOException;
 public class ShowSubjectController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     private SubjectDB subjectDB;
-    @FXML protected Button home,createSubject,delete,course,subject,saveSubject;
+    @FXML protected Button home,createSubject,delete,course,subject,saveSubject,logout;
     @FXML private TableView<Subject> tableView;
     @FXML protected TableColumn semester,year,courseID,courseTitle,credit,preCourse,difficult,withCourseID;
 
     @FXML
     public void initialize(){
-        subjectDB = new SubjectDB();
         semester.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("semester"));
         year.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("year"));
         courseID.setCellValueFactory(new PropertyValueFactory<Subject,Integer>("courseID"));
@@ -98,6 +97,14 @@ public class ShowSubjectController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+    @FXML
+    public void logoutBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Info.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }

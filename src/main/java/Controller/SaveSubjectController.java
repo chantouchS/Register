@@ -18,7 +18,7 @@ import model.SubjectPlan;
 import java.io.IOException;
 
 public class SaveSubjectController {
-    @FXML protected Button home,course,subjects,saveSubject,delete;
+    @FXML protected Button home,course,subjects,saveSubject,delete,logout;
     @FXML protected ImageView homeIcon,subjectI,courseI,kuSign;
     @FXML TableView<SubjectPlan> tableView;
     @FXML protected TableColumn semester,year,courseID,courseTitle,credit,preCourse,difficult,withCourseID;
@@ -33,6 +33,7 @@ public class SaveSubjectController {
         credit.setCellValueFactory(new PropertyValueFactory<SubjectPlan,String>("credit"));
         difficult.setCellValueFactory(new PropertyValueFactory<SubjectPlan,Pane>("difficultPane"));
         withCourseID.setCellValueFactory(new PropertyValueFactory<SubjectPlan,String>("withCourseID"));
+        //System.out.println(SubjectPlanDB.getAllSubject().toString());
 
         tableView.setItems(SubjectPlanDB.getAllSubject());
         setResizeable();
@@ -89,6 +90,13 @@ public class SaveSubjectController {
             tableView.setItems(SubjectPlanDB.getAllSubject());
         }
     }
-
+    @FXML
+    public void logoutBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Info.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
 
 }

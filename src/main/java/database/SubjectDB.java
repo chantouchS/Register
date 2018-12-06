@@ -9,8 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class SubjectDB {
-    private static String dbURL = "jdbc:sqlite:Database.db";
-    private static String dbName = "org.sqlite.JDBC";
+
+
+
+    public static String dbURL = "jdbc:sqlite:Database.db";
+    public static String dbName = "org.sqlite.JDBC";
 
     public static ArrayList<String> getCourseID(){
         ArrayList<String> courseSet = new ArrayList<>();
@@ -305,5 +308,34 @@ public class SubjectDB {
             e.printStackTrace();
         }
         return check;
+    }
+    public static int[] getYearAndSemester(String courseID){
+        int[] tmp = new int[2];
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "select * from Subjects";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while(resultSet.next()){
+                    String courseIDDB  = resultSet.getString("CourseID");
+                    int semesterDB = resultSet.getInt("Semester");
+                    int yearDB = resultSet.getInt("Year");
+                    if(courseIDDB.equals(courseID)){
+                        System.out.println("SubjectDB: " + courseIDDB);
+                        tmp[0] = yearDB;
+                        tmp[1] = semesterDB;
+                    }
+
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tmp;
     }
 }

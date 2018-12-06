@@ -25,7 +25,7 @@ import java.util.TreeSet;
 public class SubjectsPassController {
     @FXML protected ImageView homeIcon,kuSign,courseI,subjectI;
     @FXML protected ChoiceBox<String> courseIDC;
-    @FXML protected Button find,pass,home,course,subjects,f,saveSubject,delete;
+    @FXML protected Button find,pass,home,course,subjects,f,saveSubject,delete,logout;
     @FXML protected TableView<SubjectPass> passTableView;
     @FXML protected Label showDetails,showErrorDetails;
     @FXML protected TableColumn courseID,courseTitle,credit,status;
@@ -48,6 +48,7 @@ public class SubjectsPassController {
         courseTitle.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("courseTitle"));
         credit.setCellValueFactory(new PropertyValueFactory<SubjectPass,String>("credit"));
         status.setCellValueFactory(new PropertyValueFactory<Subject,String>("status"));
+        System.out.println(addToTable.toString());
         passTableView.setItems(addToTable);
         setVisibleFBtn();
         setVisiblePassBtn();
@@ -95,7 +96,7 @@ public class SubjectsPassController {
             pass.setVisible(false);
             f.setVisible(false);
             showErrorDetails.setText("");
-            showDetails.setText("Please fill in course id");
+            showDetails.setText("Please select course id");
         }
 
     }
@@ -292,6 +293,14 @@ public class SubjectsPassController {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SaveSubject.fxml"));
+        stage.setScene(new Scene(loader.load()));
+        stage.show();
+    }
+    @FXML
+    public void logoutBtn(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Info.fxml"));
         stage.setScene(new Scene(loader.load()));
         stage.show();
     }

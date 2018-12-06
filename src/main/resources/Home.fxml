@@ -44,7 +44,7 @@
                   <Image url="@image/course.png" />
                </image>
             </ImageView>
-            <Button fx:id="saveSubject" alignment="CENTER" layoutX="-2.0" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="   Save" textAlignment="CENTER" textFill="#cccbcb">
+            <Button fx:id="saveSubject" alignment="CENTER" layoutX="-2.0" layoutY="280.0" mnemonicParsing="false" onAction="#saveSubjectsBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="  Plan" textAlignment="CENTER" textFill="#cccbcb">
                <font>
                   <Font name="Cordia New" size="22.0" />
                </font>
@@ -55,6 +55,11 @@
                   <Image url="@image/icons8-save-as-64.png" />
                </image>
             </ImageView>
+            <Button fx:id="logout" alignment="CENTER" layoutY="674.0" mnemonicParsing="false" onAction="#logoutBtn" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #1a2224;" text="     Logout" textAlignment="CENTER" textFill="#cccbcb">
+               <font>
+                  <Font name="Cordia New" size="22.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane prefHeight="60.0" prefWidth="1323.0" style="-fx-background-color: #1a2224;">
@@ -80,23 +85,23 @@
             <TableColumn fx:id="withCourseID" prefWidth="114.39996337890625" text="With Course ID" />
         </columns>
       </TableView>
-      <ChoiceBox fx:id="semester" layoutX="1204.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
-      <ChoiceBox fx:id="year" layoutX="1074.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="1034.0" layoutY="120.0" text="Year" textFill="#070707">
+      <ChoiceBox fx:id="semester" layoutX="1158.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
+      <ChoiceBox fx:id="year" layoutX="1028.0" layoutY="120.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="988.0" layoutY="120.0" text="Year" textFill="#070707">
          <font>
             <Font name="Cordia New Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="1134.0" layoutY="120.0" text="Semester" textFill="#070707">
+      <Label layoutX="1088.0" layoutY="120.0" text="Semester" textFill="#070707">
          <font>
             <Font name="Cordia New Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="show" layoutX="1180.0" layoutY="210.0" mnemonicParsing="false" onAction="#showSubjectBtn" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #1a2224;" text="show" textFill="#cccbcb">
+      <Button fx:id="show" layoutX="1215.0" layoutY="110.0" mnemonicParsing="false" onAction="#showSubjectBtn" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #1a2224;" text="show" textFill="#cccbcb">
          <font>
             <Font name="Cordia New" size="22.0" />
          </font></Button>
-      <Button fx:id="save" layoutX="1074.0" layoutY="210.0" mnemonicParsing="false" onAction="#saveBtn" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #1a2224;" text="save" textFill="#cccbcb">
+      <Button fx:id="save" layoutX="904.0" layoutY="590.0" mnemonicParsing="false" onAction="#saveBtn" prefHeight="32.0" prefWidth="74.0" style="-fx-background-color: #1a2224;" text="save" textFill="#cccbcb">
          <font>
             <Font name="Cordia New" size="22.0" />
          </font>
